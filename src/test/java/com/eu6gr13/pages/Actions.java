@@ -6,6 +6,7 @@ import com.eu6gr13.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -520,7 +521,126 @@ int x;
         BrowserUtils.waitFor(2);
     }
 
+    public void invalidInformation() {
+        BrowserUtils.waitFor(2);
+        Assert.assertEquals("Messages doesn't match", "Invalid user name or password.", invalidInformationText_Locator.getText());
 
+    }
+
+    public String alertTextEmpty() {
+        BrowserUtils.waitFor(1);
+        if (usernameBox_Locator.getAttribute("value").isEmpty()) {
+            return usernameBox_Locator.getAttribute("validationMessage");
+        } else if (passwordBox_Locator.getAttribute("value").isEmpty()) {
+            return passwordBox_Locator.getAttribute("validationMessage");
+        }
+        return null;
+
+
+    }
+
+    public void clickForgetPass() {
+        forgotYourPasswordLocator.click();
+    }
+
+    public void forgotPasswordPage() {
+        Assert.assertEquals("https://qa.fleetgru.com/user/reset-request", Driver.get().getCurrentUrl());
+
+    }
+
+    public void rememberMeCheckBox() {
+
+        Assert.assertTrue(rememberMeLocator.getSize().getHeight() != 0);
+    }
+
+    public void rememberMeİsClickable() {
+        BrowserUtils.waitFor(2);
+        BrowserUtils.clickWithJS(rememberMeLocator);
+        BrowserUtils.waitFor(2);
+        Assert.assertTrue(rememberMeLocator.isSelected());
+
+    }
+
+    public void enterPassword(String password) {
+        passwordBox_Locator.sendKeys(password);
+        BrowserUtils.waitFor(3);
+    }
+
+    public void isBulletSigns(String password) {
+
+        Assert.assertTrue(passwordBox_Locator.getAttribute("type").equals("password"));
+    }
+
+    public void loginWithEnterKey(String username, String password) {
+        usernameBox_Locator.sendKeys(username);
+        BrowserUtils.waitFor(1);
+        passwordBox_Locator.sendKeys(password + Keys.ENTER);
+        BrowserUtils.waitForPageToLoad(10);
+    }
+
+    public void nameCheck(String user, String name) {
+
+        Assert.assertEquals(name, userName_Locator.getText());
+
+    }
+
+    public void fullLogin(String usertype) { // url ile birlikte login olmak için
+        Driver.get().get(ConfigurationReader.get("url"));
+        BrowserUtils.waitForPageToLoad(10);
+        login(usertype);
+    }
+
+    public void backMethod() {
+        BrowserUtils.waitFor(3);
+        Driver.get().navigate().back();
+        BrowserUtils.waitForPageToLoad(10);
+        Assert.assertEquals("https://qa.fleetgru.com/user/login", Driver.get().getCurrentUrl());
+    }
+
+    public void closeTab() {
+//        Driver.get().manage().window().setPosition(new Point(990,0));
+//        Driver.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//
+//        String url = ConfigurationReader.get("url");
+//        Driver.get().get(url);
+//
+//        new LoginPage().login("salesmanager101", "UserUser123");
+//        new DashboardPage().waitUntilLoaderScreenDisappear();
+
+        ((JavascriptExecutor) Driver.get()).executeScript("window.open('about:blank','_blank');");
+        new WebDriverWait(Driver.get(), 3).until(ExpectedConditions.numberOfWindowsToBe(2));
+
+        BrowserUtils.waitFor(3);
+
+        ArrayList<String> tabs2 = new ArrayList<>(Driver.get().getWindowHandles());
+        Driver.get().close();
+        Driver.get().switchTo().window(tabs2.get(1));
+
+        BrowserUtils.waitFor(3);
+
+        Driver.get().get("https://qa.fleetgru.com/user/login");
+
+        try {
+            waitUntilLoaderScreenDisappear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        BrowserUtils.waitForPageToLoad(15);
+        Assert.assertEquals("https://qa.fleetgru.com/", Driver.get().getCurrentUrl());
+        BrowserUtils.waitFor(3);
+
+    }
+    public void login22(String userName, String passWord) {
+        BrowserUtils.waitForPageToLoad(10);
+        BrowserUtils.waitFor(4);
+        usernameBox_Locator.sendKeys(userName);
+        BrowserUtils.waitFor(1);
+        passwordBox_Locator.sendKeys(passWord);
+        BrowserUtils.waitFor(6);
+        loginButton.click();
+        BrowserUtils.waitFor(1);
+        // invalid bilgilerle login olmak için kullanmamız gereken method  mustafa
+    }
 }
 
 
