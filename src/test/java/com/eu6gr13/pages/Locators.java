@@ -171,5 +171,14 @@ public class Locators {
     @FindBy(id = "remember_me") // remember me butonu
     public WebElement rememberMeLocator;
 
+    @FindBy (xpath = "//span[.='General Information']") //MURAT
+    public WebElement generalInformationPage_Locator;
+
+    @FindBy (xpath = "//table/tbody/tr/td[21]") //MURAT
+    public List<WebElement> any3dot_Locator;
+
+    @FindBy(xpath = "//a[@title='View']") //MURAT
+    public WebElement eyeIcon_Locator;
+
 
 }

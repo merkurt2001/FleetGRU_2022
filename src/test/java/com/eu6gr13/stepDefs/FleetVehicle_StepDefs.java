@@ -90,5 +90,21 @@ public class FleetVehicle_StepDefs extends Actions {
      *US-010 Grid Settings-locators
      * Assignee : Fatih
      */
+    @Then("General information page can be seen") //MURAT
+    public void general_information_page_can_be_seen() { verifyGeneralInformationPage(); }
+
+    @Given("click on the any Eye Icon")//MURAT
+    public void click_on_the_any_Eye_Icon() { clickAnyEyeIcon();  }
+
+    @Then("{string} button can be seen")//MURAT
+    public void button_can_be_seen(String string) { verifyEditDeleteAddEventButtons(string);   }
+
+    @Then("{string} button cannot be seen")//MURAT
+    public void button_cannot_be_seen(String string) { verifyDriverEditDeleteAddEventButtons(string);    }
+
+    @Then("General Information page and Fleet-Vehicle page should be the same")//MURAT
+    public void general_Information_page_and_Fleet_Vehicle_page_should_be_the_same() {
+        verifyGeneralInformationCarTable();
+    }
 
 }
