@@ -93,4 +93,45 @@ public class Locators {
     @FindBy(xpath = "//div[@class='message-item message']/strong") // save yapıldıktan sonra general information sayfasının altında çıkan title
     public WebElement afterSaveButtonTitleCheckInGeneralInformation_Locator;
 
+    /**
+     *US-010 Grid Settings-locators
+     * Assignee : Fatih
+     */
+    @FindBy(xpath= "//a[@title='Grid Settings']")
+    public WebElement  gearIcon_Locator;
+
+    @FindBy(xpath = "//div[text()='Grid Settings']")
+    public WebElement gridSettings_Title_Locator;
+
+    @FindBy(className= ".pull-right.disabled")   //
+    public WebElement gridSettings_SelectAll_Locator;
+
+    @FindBy(xpath = "(//tbody/tr//td[@class='title-cell'])")
+    public List<WebElement> gridSettings_ColumnTitle_locator;
+
+    @FindBy(xpath = "//tbody/tr/td/label")
+    public List<WebElement> gridSettings_ColumnName_locator;
+
+    @FindBy(xpath = "//input[@data-role='column-manager-search']")
+    public WebElement gridSettings_QuickSearch_Locator;
+
+    @FindBy(xpath = "//span[@class='column-filter-match']")
+    public WebElement columnFilter_Match_Locator;
+
+    @FindBy(xpath = "(//tbody/tr//td//span[@title='Move column'])")
+    public List<WebElement> gridSettings_Sort_Locator;
+
+    @FindBy(xpath = " //tbody/tr/td[@class='visibility-cell']/input[@type='checkbox']")
+    public List<WebElement> gridSettings_Checkbox_locator;
+
+    @FindBy(xpath = "//span[@class='grid-header-cell__label']")
+    public List<WebElement> grid_HeaderCell_Locator;
+
+    /**
+     *US-010 Grid Settings-locators
+     * Assignee : Fatih
+     */
+
+
+
 }
