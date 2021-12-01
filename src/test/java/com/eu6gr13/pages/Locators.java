@@ -203,6 +203,30 @@ public class Locators {
     //Ugur - Reset Filters Butonu
     @FindBy(xpath = "//i[@class='fa-refresh']")
     public WebElement resetButton;
+    @FindBy(xpath = "//a[@*='Filters']")
+    public WebElement filterButton_Locator;
+
+    @FindBy(xpath = "//button/a")
+    public WebElement manageFiltersButton_Locator;
+
+    @FindBy(xpath = "//b")
+    public WebElement driverLink_Locator;
+
+    @FindBy(xpath = "//button[contains(text(),'contains')]")
+    public WebElement containsLink_Locator;
+
+    @FindBy(css = ".dropdown-item.choice-value")
+    public List<WebElement> methods_Locator;
+
+    @FindBy(xpath = "//div[2]/input[1]")
+    public WebElement inputBox_Locator;
+
+    @FindBy(css = ".btn.btn-primary.filter-update")
+    public WebElement updateButton_Locator;
+
+    @FindBy(xpath = "//td[@data-column-label='Driver']")
+    public List<WebElement> driverNames_Locator;
+
 
 
 
