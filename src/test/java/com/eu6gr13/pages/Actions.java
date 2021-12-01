@@ -271,6 +271,47 @@ public class Actions extends Locators {
     public void verifyEventsInformation() {
         Assert.assertTrue( BrowserUtils.waitForVisibility(afterSaveButtonTitleCheckInGeneralInformation_Locator,10).isDisplayed());
     }
+
+
+
+    /**
+     *US-010 Grid Settings-method blocks
+     * Assignee : Fatih
+     */
+    public void clickGearIcon(){
+        //  BrowserUtils.waitForVisibility(gearIcon_Locator,15).click();
+        BrowserUtils.waitFor(5);
+        gearIcon_Locator.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    public void gridSettingsTitleIsDisplayed(){
+        BrowserUtils.verifyElementDisplayed(gridSettings_Title_Locator);
+    }
+
+    public void matchColumnTitle(List<String> expectedColName){
+        BrowserUtils.waitFor(5);
+        Assert.assertEquals("NOT match",expectedColName,BrowserUtils.getElementsText(gridSettings_ColumnTitle_locator));
+        System.out.println("expectedColName = " + expectedColName);
+        System.out.println("actualColNames = " + BrowserUtils.getElementsText(gridSettings_ColumnTitle_locator));
+        BrowserUtils.waitFor(3);
+    }
+    public void enterQuickSearch(String enterColumnName){
+        BrowserUtils.waitFor(5);
+        gridSettings_QuickSearch_Locator.sendKeys(enterColumnName);
+    }
+
+    public void matchColumnFilter(String expectedColumnName){
+        Assert.assertEquals("Does NOT match", expectedColumnName, columnFilter_Match_Locator.getText());
+
+    }
+
+    /**
+     *US-010 Grid Settings-method blocks
+     * Assignee : Fatih
+     */
+
+
 }
 
 
