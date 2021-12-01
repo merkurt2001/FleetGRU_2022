@@ -641,6 +641,79 @@ int x;
         BrowserUtils.waitFor(1);
         // invalid bilgilerle login olmak için kullanmamız gereken method  mustafa
     }
+    public void verifyGeneralInformationPage(){ //MURAT
+        BrowserUtils.waitFor(3);
+        Assert.assertTrue(generalInformationPage_Locator.isDisplayed());
+    }
+
+    public void clickAnyEyeIcon() {  //MURAT
+        BrowserUtils.waitFor(5);
+
+        org.openqa.selenium.interactions.Actions actions = new org.openqa.selenium.interactions.Actions(Driver.get());
+
+        Random random = new Random();
+        int num = random.nextInt(any3dot_Locator.size()+1);
+
+        try{
+            actions.moveToElement(any3dot_Locator.get(num)).perform();
+            BrowserUtils.waitFor(2);
+            eyeIcon_Locator.click();
+        }catch(Exception e) {
+            actions.moveToElement(Driver.get().findElements(By.xpath("//table/tbody/tr/td[20]")).get(num)).perform();
+            BrowserUtils.waitFor(2);
+            eyeIcon_Locator.click();
+        }
+    }
+
+    public void verifyEditDeleteAddEventButtons (String button){//MURAT
+        BrowserUtils.waitFor(2);
+        WebElement button_Locator = Driver.get().findElement(By.xpath("//a[contains(@title,'"+button+"')]"));
+        Assert.assertTrue(button_Locator.isDisplayed());
+    }
+
+    public void verifyDriverEditDeleteAddEventButtons (String button){//MURAT
+
+        BrowserUtils.waitFor(2);
+        try{
+            WebElement button_Locator = Driver.get().findElement(By.xpath("//a[contains(@title,'"+button+"')]"));
+            Assert.assertFalse(button_Locator.isDisplayed());
+        }catch(Exception e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    public void verifyGeneralInformationCarTable(){//MURATTTT
+
+        BrowserUtils.waitFor(5);
+
+        Random random = new Random();
+        int num = random.nextInt(tableRowCount_Locator.size())+1;
+
+        WebElement element = element= Driver.get().findElement(By.xpath("(//table/tbody/tr/td[2])["+num+"]"));
+
+
+        List<String> carTable = BrowserUtils.getElementsText(By.xpath("//table/tbody/tr["+num+"]/td"));
+        System.out.println("car.toString() = " + carTable.toString());
+
+        element.click();
+
+        BrowserUtils.waitFor(2);
+        List<String> generalInf = BrowserUtils.getElementsText(By.xpath("//div[@class='controls']/div"));
+        List<String> generalInformation = new ArrayList<>();
+
+        for(int i=0; i< generalInf.size();i++){
+
+            if (generalInf.get(i).equals("N/A")){
+                generalInformation.add("");
+            }else{
+                generalInformation.add(generalInf.get(i));
+            }
+        }
+        System.out.println("GI.toString() = " + generalInformation.toString());
+
+        Assert.assertEquals(generalInformation, carTable);
+
+    }
 }
 
 
