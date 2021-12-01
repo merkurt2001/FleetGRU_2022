@@ -714,6 +714,67 @@ int x;
         Assert.assertEquals(generalInformation, carTable);
 
     }
+
+
+
+    //Ugur Filter butona basma
+    public void clickOnFilterIcon() {
+        waitUntilLoaderScreenDisappear();
+        filterIcon.click();
+    }
+
+    //Ugur Manage Filter butona basma
+    public void clickOnManageFilters() {
+        waitUntilLoaderScreenDisappear();
+        manageFiltersButton.click();
+    }
+
+    //Ugur Sıralı filtreleri tıklayarak seçme
+    public void chooseFiltersByClick(List<String> selectedElms){
+        for (String item : selectedElms) {
+            WebElement a= Driver.get().findElement(By.xpath("//label[@title='"+item+"']/input"));
+            a.click();
+        }
+    }
+
+    //Ugur İşaretlenen filtrelerin seçildiğini teyit
+    public void verifySelectedFiltersAreApplied(List<String> selectedElms) {
+        String allText = "";
+        for (WebElement filterElement : selectedFilterElements) {
+            allText = allText + filterElement.getText();
+        }
+
+        for (String selectedElm : selectedElms) {
+            Assert.assertTrue(allText.contains(selectedElm));
+        }
+    }
+
+    //Ugur Filtre adını yazarak çekme
+    public void chooseFilterByTypingName(String filterName) throws InterruptedException {
+        //  filterSearchBox.sendKeys(filterName);
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
+        jse.executeScript("arguments[0].setAttribute('value', '" + filterName +"')", filterSearchBox);
+        WebElement a= Driver.get().findElement(By.xpath("//label[@title='"+filterName+"']/input"));
+        a.click();
+    }
+
+    //   //Ugur adını yazdığın filtrenin secildiğini teyit
+    public void verifyTypedFilterIsSelected (String filterName) {
+        Assert.assertTrue(selectedFilterElements.get(0).getText().contains(filterName));
+    }
+
+    ////Ugur filterelin resetlendiğini kontrol etme
+    public void verifyNoFilterIsApplied () {
+        Assert.assertTrue(selectedFilterElements.size()==0);
+    }
+
+    //Ugur reset butonuna basma
+    public void clickOnResetButton() {
+        JavascriptExecutor jse = (JavascriptExecutor ) Driver.get();
+        jse.executeScript("arguments[0].click();", resetButton);
+    }
+
+
 }
 
 
