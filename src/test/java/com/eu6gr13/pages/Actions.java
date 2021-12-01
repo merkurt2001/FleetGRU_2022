@@ -310,6 +310,215 @@ public class Actions extends Locators {
      *US-010 Grid Settings-method blocks
      * Assignee : Fatih
      */
+    //suat**********
+
+    public void selectRandomRow(){
+        Random random = new Random();
+        int i = random.nextInt(carRows_Locator.size());
+        carRows_Locator.get(i);
+    }
+    public void hoverRandomThreeDot(){
+        Random random = new Random();
+        BrowserUtils.waitFor(2);
+        int i = random.nextInt(carRows_Locator.size());
+        System.out.println(i);
+        BrowserUtils.waitFor(2);
+
+        String dotElement = "(//td[@class='action-cell grid-cell grid-body-cell'])["+i+"]";
+
+        BrowserUtils.waitFor(2);
+        //  BrowserUtils.waitForClickablility(carRowsThreeDot_Locator.get(i),5);
+        WebElement webElement = Driver.get().findElement(By.xpath(dotElement));
+        BrowserUtils.hover(webElement);
+        if(deleteButton_Locator.isEnabled()){
+
+        }else{
+            BrowserUtils.waitFor(2);
+            //BrowserUtils.waitForClickablility(carRowsThreeDot_Locator.get(i),5);
+            carRowsThreeDot_Locator.get(i).click();
+        }
+    }
+
+    public void verifyVisibleRandomThreeDot(){
+        Random random = new Random();
+        BrowserUtils.waitFor(3);
+        int i = random.nextInt(carRows_Locator.size());
+        BrowserUtils.waitFor(1);
+
+        System.out.println("i = " + i);
+        // BrowserUtils.waitForVisibility(carRows_Locator.get(i),4);
+        Assert.assertTrue(carRowsThreeDot_Locator.get(i).isDisplayed());
+    }
+
+    public void navigateToDelete() {
+        Random random = new Random();
+        int i = random.nextInt(25);
+        BrowserUtils.waitFor(2);
+        if(deleteButton_Locator.isDisplayed()){
+
+            String tabLocator = "(//tbody/tr/td[20])["+i+"]";
+
+            String deleteLocator = "//tbody/tr[contains(text(),'Delete')]";
+            try {
+                BrowserUtils.waitForClickablility(By.xpath(tabLocator), 5);
+                WebElement tabElement = Driver.get().findElement(By.xpath(tabLocator));
+                new org.openqa.selenium.interactions.Actions(Driver.get()).moveToElement(tabElement).pause(200).doubleClick(tabElement).build().perform();
+            } catch (Exception e) {
+                BrowserUtils.clickWithWait(By.xpath(tabLocator), 5);
+            }
+            try {
+                BrowserUtils.waitForPresenceOfElement(By.xpath(deleteLocator), 5);
+                BrowserUtils.waitForVisibility(By.xpath(deleteLocator), 5);
+                BrowserUtils.scrollToElement(Driver.get().findElement(By.xpath(deleteLocator)));
+                Driver.get().findElement(By.xpath(deleteLocator));
+            } catch (Exception e) {
+                // BrowserUtils.clickWithTimeOut(Driver.get().findElement(By.xpath(deleteLocator)),  5);
+
+            }
+        }else{
+            carRowsThreeDot_Locator.get(i).click();
+        }
+
+    }
+
+    public void loginSuat(String userType) {
+        //go to login page
+        Driver.get().get(ConfigurationReader.get("url"));
+        //based on input enter that user information
+        String username =null;
+        String password =null;
+
+        if(userType.equals("driver")){
+            username = ConfigurationReader.get("driver_username");
+            password = ConfigurationReader.get("driver_password");
+        }else if(userType.equals("salesmanager")){
+            username = ConfigurationReader.get("salesmanager_username");
+            password = (ConfigurationReader.get("salesmanager_password"));
+        }else if(userType.equals("storemanager")){
+            username = ConfigurationReader.get("storemanager_username");
+            password = ConfigurationReader.get("storemanager_password");
+        }
+        //send username and password and login
+        login2(username,password);
+    }
+
+    public void  login3(String username,String password){  //Can't be static because; Web Elements can be static but not action
+        usernameBox_Locator.sendKeys(username);
+        passwordBox_Locator.sendKeys(password);
+        loginButton.click();
+    }
+
+    public static void login2(String username, String password) {
+        new Actions().login3(username, password);
+    }
+
+    public void clickDelete(){
+//            Random random = new Random();
+//            int i = random.nextInt(25);
+//            BrowserUtils.waitFor(2);
+//            String tabLocator = "(//tbody/tr/td[20])["+i+"]";
+//
+//            String deleteLocator = "//tbody/tr[contains(text(),'Delete')]";
+//            try {
+//                BrowserUtils.waitForClickablility(By.xpath(tabLocator), 5);
+//                WebElement tabElement = Driver.get().findElement(By.xpath(tabLocator));
+//                new org.openqa.selenium.interactions.Actions(Driver.get()).moveToElement(tabElement).pause(200).doubleClick(tabElement).build().perform();
+//            } catch (Exception e) {
+//                BrowserUtils.clickWithWait(By.xpath(tabLocator), 5);
+//            }
+//            try {
+//                BrowserUtils.waitForPresenceOfElement(By.xpath(deleteLocator), 5);
+//                BrowserUtils.waitForVisibility(By.xpath(deleteLocator), 5);
+//                BrowserUtils.scrollToElement(Driver.get().findElement(By.xpath(deleteLocator)));
+//                Driver.get().findElement(By.xpath(deleteLocator)).click();
+//            } catch (Exception e) {
+//                // BrowserUtils.clickWithTimeOut(Driver.get().findElement(By.xpath(deleteLocator)),  5);
+//
+//            }
+        deleteButton_Locator.click();
+    }
+
+    public void verifyAlertText(String title){
+
+        BrowserUtils.waitFor(2);
+        Assert.assertEquals(title,alertMassage_Locator.getText());
+    }
+
+    public void yesAlert(){
+        yesDelete_Locator.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    public void verifyAssertMassage(String expectedMassage){
+        String actualMassage = massage_Locator.getText();
+        BrowserUtils.waitFor(2);
+        Assert.assertEquals(expectedMassage,actualMassage);
+    }
+
+    public void verifyOptions(List<String> menuOptions){
+        BrowserUtils.waitFor(5);
+        List<String> actualOptions = BrowserUtils.getElementsText(menuOptions_Locators);
+        //BrowserUtils.waitFor(3);
+        Assert.assertEquals(actualOptions,menuOptions);
+        System.out.println("menuOptions = " + menuOptions);
+        System.out.println("actualOptions = " + actualOptions);
+    }
+int x;
+    public int beforeDeleteRecords(){
+        BrowserUtils.waitFor(2);
+        String text = record_Locator.getText();
+        String[] s = text.split(" ");
+        BrowserUtils.waitFor(2);
+        int recordNumber = Integer.parseInt(s[2]);
+        System.out.println(recordNumber);
+        x=recordNumber;
+        return recordNumber;
+    }
+
+    public int afterDeleteRecords(){
+        BrowserUtils.waitFor(4);
+        String afterText = record_Locator.getText();
+        String[] split = afterText.split(" ");
+        BrowserUtils.waitFor(2);
+        int afterRecordNumber = Integer.parseInt(split[2]);
+        // String afterRecordNumber = split[2];
+
+        System.out.println(afterRecordNumber);
+        return afterRecordNumber;
+    }
+
+    public void verifyDeleteRecords(){
+        BrowserUtils.waitFor(3);
+        Assert.assertNotEquals(x,afterDeleteRecords());
+
+    }
+
+    public void verifyGetTitlePage(String expectedTitle){
+        BrowserUtils.waitFor(3);
+        String actualTitle = generalInformationPageTitle_Locator.getText();
+        BrowserUtils.waitFor(1);
+        System.out.println(actualTitle);
+        System.out.println(expectedTitle);
+        Assert.assertEquals(actualTitle,expectedTitle);
+    }
+
+    public void selectAnyCar() {
+        Random random = new Random();
+        int randomRow = random.nextInt(carRows_Locator.size());
+        BrowserUtils.waitFor(3);
+
+        carRows_Locator.get(randomRow).click();
+    }
+
+    public void verifyModule(String Contain) {
+        BrowserUtils.waitFor(3);
+        System.out.println(getPageSubTitle());
+        Assert.assertTrue(getPageSubTitle().contains(Contain));
+
+        BrowserUtils.waitFor(4);
+        Driver.get().findElement(By.xpath("//span[.='Driver']")).click();
+        BrowserUtils.waitFor(2);
+    }
 
 
 }

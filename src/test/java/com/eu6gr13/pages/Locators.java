@@ -131,6 +131,34 @@ public class Locators {
      *US-010 Grid Settings-locators
      * Assignee : Fatih
      */
+//suat******
+    @FindBy(css = "tbody>tr") // cars page satırlar
+    public List<WebElement> carRows_Locator;
+
+    @FindBy(xpath = "//td[@class='action-cell grid-cell grid-body-cell']") // cars page 3nokta
+    public List<WebElement> carRowsThreeDot_Locator;
+
+    @FindBy(xpath = "//i[@class='fa-trash-o hide-text']")
+    public WebElement deleteButton_Locator;
+
+    @FindBy(xpath = "(//div/h3)[2]")
+    public WebElement alertMassage_Locator;
+
+    @FindBy(xpath = "//a[@*='btn ok btn-danger']")
+    public WebElement yesDelete_Locator;
+
+    @FindBy(xpath = "//div[@class=\"message\"]")
+    public WebElement massage_Locator;
+
+    @FindBy(css = "span.title-level-1")
+    public List<WebElement> menuOptions_Locators;
+
+    @FindBy(xpath = "(//div/label)[4]")
+    public WebElement record_Locator;
+
+    @FindBy(css = "div>h5")
+    public WebElement generalInformationPageTitle_Locator;
+
 
 
 
