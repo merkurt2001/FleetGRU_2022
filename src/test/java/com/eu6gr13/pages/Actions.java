@@ -773,8 +773,121 @@ int x;
         JavascriptExecutor jse = (JavascriptExecutor ) Driver.get();
         jse.executeScript("arguments[0].click();", resetButton);
     }
+    public void ClickTheFilterButton() {
+        BrowserUtils.waitFor(3);
+        filterButton_Locator.click();
+        BrowserUtils.waitFor(2);
+    }
 
+    public void ClickTheManageFilterButton() {
+        BrowserUtils.waitFor(3);
+        manageFiltersButton_Locator.click();
+        BrowserUtils.waitFor(2);
+    }
 
+    public void clickAnyOptionOnManageFilterMenu(String option) {
+
+        BrowserUtils.waitFor(3);
+        WebElement anyOption = Driver.get().findElement(By.xpath("//input[@title = '" + option + "']"));
+
+        anyOption.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    public void clickDriverLink() {
+
+        BrowserUtils.waitFor(3);
+        driverLink_Locator.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    public void clickContainsLink() {
+        BrowserUtils.waitFor(3);
+        containsLink_Locator.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    public List<String> createMethodList() {
+        BrowserUtils.waitFor(3);
+        return BrowserUtils.getElementsText(methods_Locator);
+    }
+
+    public void clickAnyMethod(String method) {
+        BrowserUtils.waitFor(3);
+        WebElement anyMethod = Driver.get().findElement(By.xpath("//a[contains(text(),'" + method.toLowerCase() + "')]"));
+        anyMethod.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    public void sendKeysInputBox(String string) {
+        BrowserUtils.waitFor(3);
+        inputBox_Locator.sendKeys(string);
+        BrowserUtils.waitFor(2);
+    }
+
+    public void clickUpdateButton() {
+        BrowserUtils.waitFor(3);
+        updateButton_Locator.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    public void verifyMethodsContain(String str) {
+        BrowserUtils.waitFor(3);
+        List<String> driverNames = BrowserUtils.getElementsText(driverNames_Locator);
+        for (String name : driverNames) {
+            Assert.assertTrue(name.toLowerCase().contains(str.toLowerCase()));
+        }
+        BrowserUtils.waitFor(2);
+    }
+
+    public void verifyMethodsDoesNotContain(String str) {
+        BrowserUtils.waitFor(3);
+        List<String> driverNames = BrowserUtils.getElementsText(driverNames_Locator);
+        for (String name : driverNames) {
+            Assert.assertFalse(name.toLowerCase().contains(str.toLowerCase()));
+        }
+        BrowserUtils.waitFor(2);
+    }
+
+    public void verifyMethodsStartsWith(String str) {
+        BrowserUtils.waitFor(3);
+        List<String> driverNames = BrowserUtils.getElementsText(driverNames_Locator);
+        for (String driverName : driverNames) {
+
+            Assert.assertEquals(driverName.substring(0, str.length()).toLowerCase(), str.toLowerCase());
+        }
+        BrowserUtils.waitFor(2);
+    }
+
+    public void verifyMethodsEndsWith(String str) {
+        BrowserUtils.waitFor(3);
+        List<String> driverNames = BrowserUtils.getElementsText(driverNames_Locator);
+        for (String driverName : driverNames) {
+
+            Assert.assertEquals(driverName.substring(driverName.length() - str.length()).toLowerCase(), str.toLowerCase());
+
+        }
+        BrowserUtils.waitFor(2);
+    }
+
+    public void verifyMethodsIsEqualTo(String str) {
+        BrowserUtils.waitFor(3);
+        List<String> driverNames = BrowserUtils.getElementsText(driverNames_Locator);
+        for (String name : driverNames) {
+
+            Assert.assertEquals(name.toLowerCase(), str.toLowerCase());
+        }
+        BrowserUtils.waitFor(2);
+    }
+    public void verifyNotAcceptNon_AlphabeticalCharacters(){
+        BrowserUtils.waitFor(3);
+        String actual = inputBox_Locator.getAttribute("value");
+        String expected = "";
+
+        Assert.assertTrue(expected.equals(actual));
+        BrowserUtils.waitFor(2);
+    }
 }
+
 
 
