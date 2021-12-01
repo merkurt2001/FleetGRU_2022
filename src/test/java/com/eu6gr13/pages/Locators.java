@@ -180,5 +180,33 @@ public class Locators {
     @FindBy(xpath = "//a[@title='View']") //MURAT
     public WebElement eyeIcon_Locator;
 
+    //Ugur Filtre Butonu locator
+    @FindBy(xpath = "//a[@title='Filters']") //sağ üst köşede bulunan filter iconu
+    public WebElement filterIcon;
+
+    //ugur manage filters locator
+    @FindBy(xpath = "//a[@class='add-filter-button']") //sol üst kösede bulunan Manage filters butonu
+    public WebElement manageFiltersButton;
+
+    //Ugur - dropdown listesindeki tüm filtreler
+    @FindBy(xpath = "//li//label")
+    public List<WebElement> filtersList;
+
+    //Ugur - dropdown listesindeki seçili filtreler
+    @FindBy(xpath = "//span[@class='filter-items']/div[@style='display: inline-block;']")
+    public List<WebElement> selectedFilterElements;
+
+    //Ugur - Filtre adı yazma butonu
+    @FindBy(xpath = "//div//input")
+    public WebElement filterSearchBox;
+
+    //Ugur - Reset Filters Butonu
+    @FindBy(xpath = "//i[@class='fa-refresh']")
+    public WebElement resetButton;
+
+
+
+
+
 
 }
