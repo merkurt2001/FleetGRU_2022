@@ -159,7 +159,17 @@ public class Locators {
     @FindBy(css = "div>h5")
     public WebElement generalInformationPageTitle_Locator;
 
+    @FindBy(xpath = "//div[.='Invalid user name or password.']") //login olmak için invalid bilgi girildikten sonra çıkan uyarı mesajı
+    public WebElement invalidInformationText_Locator;
 
+    @FindBy(css= "div.alert > div") // username veya password girilmediğinde çıkan uyarı yazısı
+    public WebElement alertText_Locator;
+
+    @FindBy(partialLinkText = "Forgot your") //forgot password butonu
+    public WebElement forgotYourPasswordLocator;
+
+    @FindBy(id = "remember_me") // remember me butonu
+    public WebElement rememberMeLocator;
 
 
 }
