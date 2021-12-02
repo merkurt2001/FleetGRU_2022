@@ -162,7 +162,7 @@ public class Actions extends Locators {
             BrowserUtils.waitFor(1);
 
             JavascriptExecutor jse = (JavascriptExecutor ) Driver.get();
-            jse.executeScript("arguments[0].click();", colors_Locator.get(i));
+            jse.executeScript("arguments[0].click();", colors_Locator);
 
             if(!afterColor_Locator.isDisplayed()) {
                 counter++;
