@@ -3,6 +3,7 @@ package com.eu6gr13.pages;
 import com.eu6gr13.utilities.BrowserUtils;
 import com.eu6gr13.utilities.ConfigurationReader;
 import com.eu6gr13.utilities.Driver;
+import com.eu6gr13.utilities.Screanshot;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -886,6 +887,154 @@ int x;
 
         Assert.assertTrue(expected.equals(actual));
         BrowserUtils.waitFor(2);
+    }
+    //EMİR METHODS
+
+    public int totalItem(){
+        String[] str=totalItem_Locator.getText().split(" ");
+        int b=Integer.parseInt(str[2]);
+        return b;
+    }
+    public List<String> allManageFiltersName(){
+        List<String> allItem=new ArrayList<>();
+        for(int i=0; i<allManageFiltersItem_Locator.size(); i++){
+            allItem.add(allManageFiltersItem_Locator.get(i).getText());
+        }
+        return allItem;
+    }
+
+    public WebElement getManageFiltersItemCheckbox(String item){
+
+        WebElement a= Driver.get().findElement(By.xpath("//label[@title='"+item+"']/input"));
+        return a;
+    }
+
+    public WebElement getFiltersItemControlBox(String item){
+        WebElement a= Driver.get().findElement(By.xpath("//div[contains(text(),'"+item+"')]"));
+        return a;
+    }
+    public void clickFilterBtn() {
+        if (!manageFiltersButton_Locator.isDisplayed()) {
+            filterButton_Locator.click();
+            BrowserUtils.waitFor(1);
+        }
+    }
+    public void selectFilter(String item){
+        if(!getManageFiltersItemCheckbox(item).isSelected()) {
+            getManageFiltersItemCheckbox(item).click();
+            BrowserUtils.waitFor(2);
+            Assert.assertTrue(getManageFiltersItemCheckbox(item).isSelected());
+        }
+        else {
+            getManageFiltersItemCheckbox(item).click();
+            BrowserUtils.waitFor(2);
+            Assert.assertFalse(getManageFiltersItemCheckbox(item).isSelected());
+        }
+
+        Screanshot.takeScreenShot();
+    }
+    public void userSelectMethod(String method){
+        List<String> actualList=BrowserUtils.getElementsText(FiltersItemControlBoxAllElement_Locator);
+        for(int i=0; i<actualList.size(); i++){
+
+            if(actualList.get(i).equals(method)){
+                FiltersItemControlBoxAllElement_Locator.get(i).click();
+                break;
+            }
+        }
+        Screanshot.takeScreenShot();
+    }
+    public void betweenMethod(String string, String string2){
+        double start=Double.parseDouble(string.replace(",",""));
+        double end=Double.parseDouble(string2.replace(",",""));
+
+        for(WebElement a: LastOdometerTableColumn_Locator){
+            if(start<=Double.parseDouble(a.getText().replace(",",""))&&end>=Double.parseDouble(a.getText().replace(",",""))){
+                Assert.assertTrue(true);
+            }
+            else{Assert.assertTrue(false);}
+        }
+    }
+    public void resultMatchMethod(String string){
+        double equalitem = Double.parseDouble(string.replace(",",""));
+        List<String> actualList = BrowserUtils.getElementsText(LastOdometerTableColumn_Locator);
+
+        if (!actualList.isEmpty()) {
+            for (WebElement a : LastOdometerTableColumn_Locator) {
+                if (equalitem == Double.parseDouble(a.getText().replace(",",""))) {
+                    Assert.assertTrue(true);
+                } else {
+                    Assert.assertTrue(false);
+                }
+            }
+        }
+        else {
+            Assert.assertTrue(true);
+        }
+    }
+    public void resultMoreThanMethod(String string){
+        if(string.contains(",")) string.replace(",","");
+        double item = Double.parseDouble(string);
+
+        List<String> actualList = BrowserUtils.getElementsText(LastOdometerTableColumn_Locator);
+
+        if (!actualList.isEmpty()) {
+            for (WebElement a : LastOdometerTableColumn_Locator) {
+                if (item < Double.parseDouble(a.getText().replace(",",""))) {
+                    Assert.assertTrue(true);
+                } else {
+                    Assert.assertTrue(false);
+                }
+            }
+        }
+        else {
+            Assert.assertTrue(true);
+        }
+    }
+    public void resultLessThanMethod(String string){
+        if(string.contains(",")) string.replace(",","");
+        double item = Double.parseDouble(string);
+        List<String> actualList=new ArrayList<>();
+        for (String a  :BrowserUtils.getElementsText(LastOdometerTableColumn_Locator) ) {
+            if(a.contains(",")) a.replace(",","");
+            actualList.add(a);
+        }
+
+        if (!actualList.isEmpty()) {
+            for (String a : actualList) {
+                if (item > Double.parseDouble(a)) {
+                    Assert.assertTrue(true);
+                } else {
+                    Assert.assertTrue(false);
+                }
+            }
+        }
+        else {
+            Assert.assertTrue(true);
+        }
+    }
+    public void emptyValuesMethod(){
+        List<String> actualList=BrowserUtils.getElementsText(LastOdometerTableColumn_Locator);
+
+        if (!actualList.isEmpty()) {
+            for (String a : actualList) {
+                if (a.isEmpty()) {
+                    Assert.assertTrue(true);
+                } else {
+                    Assert.assertTrue(false);
+                }
+            }
+        }
+        else {
+            Assert.assertTrue(true);
+        }
+    }
+    public void resultTableNotChangeMethod(){
+        int total_first=totalItem();
+        BetweenUpdateButton_Locator.click();
+        BrowserUtils.waitFor(1);
+        int total_last=totalItem();
+        Assert.assertEquals(total_last,total_first);
     }
 }
 
