@@ -18,11 +18,15 @@ public class LastOdometerStepDefs extends Actions {
         BrowserUtils.waitFor(5);
     }
 
+
+
     @When("the user click the Filter button")
     public void the_user_click_the_Filter_button() {
         clickFilterBtn();
 
     }
+
+
     @When("the user click Manage Filter")
     public void the_user_click_Manage_Filter() {
        manageFiltersButton_Locator.click();

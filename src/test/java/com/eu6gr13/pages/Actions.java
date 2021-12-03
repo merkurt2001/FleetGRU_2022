@@ -5,10 +5,7 @@ import com.eu6gr13.utilities.ConfigurationReader;
 import com.eu6gr13.utilities.Driver;
 import com.eu6gr13.utilities.Screanshot;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Actions extends Locators {
 
@@ -1097,8 +1095,129 @@ int x;
      * US-010 Grid Settings-method blocks
      * Assignee : Fatih
      */
+    /*
+    Yasin Actions Added Below
+     */
+    public void clickOnSomeVehicle(){
+        Random r= new Random();
+        if(r.nextInt(10)>5){
+            nextPageButton.click();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            vehicles= Driver.get().findElements(By.cssSelector("tr.grid-row"));
+        }
+        WebElement vehicleToBeClicked= vehicles.get(r.nextInt(vehicles.size())-1);
+        driverInfo=vehicleToBeClicked.findElement(By.xpath(".//td[@data-column-label='Driver']")).getText();
+        vehicleToBeClicked.click();
+        BrowserUtils.waitForPageToLoad(5);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void LoginWithCredentials(String username, String password){
+        usernameInputLocator.sendKeys(username);
+        passwordInputLocator.sendKeys(password);
+        loginButtonLocator.click();
+    }
+
+    public String returnAlert(){
+        return alertTextLocator.getText();
+    }
+    public String returnEmptyAlert(){
+        if(usernameInputLocator.getAttribute("value").isEmpty()){
+            return usernameInputLocator.getAttribute("validationMessage");
+        }else if (passwordInputLocator.getAttribute("value").isEmpty()){
+            return passwordInputLocator.getAttribute("validationMessage");
+        }
+        return null;
+    }
+
+    public boolean rememberMeIsVisible() throws InterruptedException {
+        return rememberMeLocator.getSize().getHeight()!=0;
+    }
+    public boolean rememberMeIsClickable() throws InterruptedException {
+        BrowserUtils.clickWithJS(rememberMeLocator);
+        return rememberMeLocator.isSelected();
+    }
 
 
+
+
+    public void loginWithEnter(String username, String password){
+        usernameInputLocator.sendKeys(username);
+        passwordInputLocator.sendKeys(password + Keys.ENTER);
+    }
+
+    public String getUserInfo(){
+        BrowserUtils.waitForPageToLoad(5);
+        return userInfo.getText();
+    }
+    public boolean isAddEventVisible(){
+        BrowserUtils.waitForPageToLoad(5);
+        return addEventButton.getSize().getWidth()!=0;
+    }
+    public boolean isAddEventClickable(){
+        WebDriverWait wait=new WebDriverWait(Driver.get(), 10);
+        return addEventButton.isDisplayed() && addEventButton.isEnabled();
+    }
+    public void clickAddEvent(){
+        addEventButton.click();
+        BrowserUtils.waitForPageToLoad(5);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public String getMidHeader() {
+        BrowserUtils.waitForPresenceOfElement(By.className("oro-subtitle"), 10);
+        return middleTitleLocator.getText();
+    }
+    public String getName(){
+        return nameLocator.getText();
+    }
+    public void LogOut(){
+        nameLocator.click();
+        logOutLocator.click();
+    }
+
+
+    public List<String> getCompulsoryFields(){
+        System.out.println(required.get(0).getText());
+        return required.stream().map(item -> item.getText().substring(0, item.getText().length()-1)).collect(Collectors.toList());
+    }
+    public boolean sendWithOnlyOneInput(String input){
+        Driver.get().findElement(By.xpath("//input[contains(@name, \""+input+"\")]")).sendKeys("AutomatedTest");
+        saveButton.click();
+        try {
+            Thread.sleep(2000);
+            Driver.get().findElement(By.className("validation-failed"));
+        } catch (NoSuchElementException | InterruptedException e){
+            return false;
+        }
+        return true;
+    }
+    public boolean addEventPageOpens(){
+        return addEventPopUp.isDisplayed();
+    }
+
+    public String navigateToModuleYasin(String menu, String subMenu) throws InterruptedException {
+        Thread.sleep(4000);
+        String menuLocatorPath="//span[normalize-space()=\""+menu+"\" and contains(@class, \"title-level-1\")]";
+        String subMenuLocatorPath="//span[normalize-space()=\""+subMenu+"\" and contains(@class, \"title-level-2\")]";
+
+        Driver.get().findElement(By.xpath(menuLocatorPath)).click();
+        Driver.get().findElement(By.xpath(subMenuLocatorPath)).click();
+        BrowserUtils.waitForPageToLoad(5);
+        Thread.sleep(5000);
+        return Driver.get().getCurrentUrl();
+    }
 
 }
 

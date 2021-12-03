@@ -280,6 +280,55 @@ public class Locators {
 
     }
 
+    public static String driverInfo="";
+
+    @FindBy(css = "tr.grid-row")
+    public List<WebElement> vehicles;
+
+    @FindBy(xpath = "//i[contains(@class, \"fa-chevron-right\")]/..")
+    public WebElement nextPageButton;
+
+    @FindBy(id = "prependedInput")
+    public WebElement usernameInputLocator;
+
+    @FindBy(id = "prependedInput2")
+    public WebElement passwordInputLocator;
+
+    @FindBy(id = "_submit")
+    public WebElement loginButtonLocator;
+
+    @FindBy(css= "div.alert > div")
+    public WebElement alertTextLocator;
+
+
+
+    @FindBy(className = "user-name")
+    public WebElement userInfo;
+    @FindBy(partialLinkText = "Add Event")
+    public WebElement addEventButton;
+
+    @FindBy(css = "h1.oro-subtitle")
+    public WebElement middleTitleLocator;
+
+    @FindBy(className = "dropdown-toggle")
+    public WebElement nameLocator;
+    @FindBy(xpath = "//a[text()=\"Logout\"]")
+    public WebElement logOutLocator;
+
+    @FindBy(xpath = "//*[@class=\"required\"]/em[text()=\"*\"]/..")
+    public List<WebElement> required;
+    @FindBy(xpath = "//label[text()=\"Title\"]")
+    public WebElement titleInput;
+    @FindBy(xpath = "//label[contains(text(), \"Organizer display\")]")
+    public WebElement organizerDisplay;
+    @FindBy(xpath="//label[contains(text(), \"email\")]")
+    public WebElement organizerEmail;
+    @FindBy(css = ".btn.btn-primary")
+    public WebElement saveButton;
+    @FindBy(xpath = "//button[@title=\"close\"]")
+    public WebElement closeButton;
+    @FindBy(className = "ui-dialog")
+    public WebElement addEventPopUp;
 
 
 
