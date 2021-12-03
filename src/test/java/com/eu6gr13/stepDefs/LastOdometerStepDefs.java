@@ -11,35 +11,33 @@ import java.util.List;
 
 public class LastOdometerStepDefs extends Actions {
 
-    @When("the user navigates to {string} to {string}")
-    public void the_user_select_from_the_top_bar(String string, String string2) {
+    @When("the user navigatess to {string} to {string}")
+    public void the_user_navigatess_to_to(String string, String string2) {
         BrowserUtils.waitFor(3);
         navigateToModule(string,string2);
         BrowserUtils.waitFor(5);
     }
 
-
-
-    @When("the user click the Filter button")
-    public void the_user_click_the_Filter_button() {
+    @When("the user click the Filter buttonn")
+    public void the_user_click_the_Filter_buttonn() {
         clickFilterBtn();
+    }
 
+    @When("the user click Manage Filterr")
+    public void the_user_click_Manage_Filterr() {
+        manageFiltersButton_Locator.click();
     }
 
 
-    @When("the user click Manage Filter")
-    public void the_user_click_Manage_Filter() {
-       manageFiltersButton_Locator.click();
-    }
-    @Then("the user select {string} filter")
-    public void the_user_select_filter(String item) {
+    @Then("the user select {string} filterr")
+    public void the_user_select_filterr(String item) {
 
-       selectFilter(item);
+        selectFilter(item);
     }
 
     @Then("the user click {string} box")
     public void the_user_click_box(String string) {
-       getFiltersItemControlBox(string).click();
+        getFiltersItemControlBox(string).click();
         Screanshot.takeScreenShot();
     }
 
@@ -56,7 +54,7 @@ public class LastOdometerStepDefs extends Actions {
     }
     @Then("user selects {string} method")
     public void user_selects_method(String string) {
-       userSelectMethod(string);
+        userSelectMethod(string);
     }
 
     @Then("the user enters start value {string} end value {string}")
@@ -67,12 +65,12 @@ public class LastOdometerStepDefs extends Actions {
     }
     @Then("click the Update button")
     public void click_the_Update_button() {
-     BetweenUpdateButton_Locator.click();
-     BrowserUtils.waitFor(2);
+        BetweenUpdateButton_Locator.click();
+        BrowserUtils.waitFor(2);
     }
     @Then("results table should only show Last Odometer between {string} to {string}")
     public void results_table_should_only_show_Last_Odometer_between_to(String string, String string2) {
-       betweenMethod(string, string2);
+        betweenMethod(string, string2);
 
     }
 
@@ -84,26 +82,26 @@ public class LastOdometerStepDefs extends Actions {
 
     @Then("All the results should match {string} exactly")
     public void all_the_results_should_match_exactly(String string) {
-       resultMatchMethod(string);
+        resultMatchMethod(string);
     }
 
     @Then("All the results should be more than {string} value")
     public void all_the_results_should_be_more_than_value(String string) {
-     resultMoreThanMethod(string);
+        resultMoreThanMethod(string);
 
     }
     @Then("All the results should be less than {string} value")
     public void all_the_results_should_be_less_than_value(String string) {
-       resultLessThanMethod(string);
+        resultLessThanMethod(string);
     }
     @Then("only empty values should be displayed")
     public void only_empty_values_should_be_displayed() {
-       emptyValuesMethod();
+        emptyValuesMethod();
     }
 
     @Then("click the Update button and result table should not change")
     public void click_the_Update_button_and_result_table_should_not_change() {
-       resultTableNotChangeMethod();
+        resultTableNotChangeMethod();
     }
 
 }
