@@ -105,7 +105,7 @@ public class Locators {
     @FindBy(xpath = "//div[text()='Grid Settings']")
     public WebElement gridSettings_Title_Locator;
 
-    @FindBy(className= ".pull-right.disabled")   //
+    @FindBy(xpath= "//div[@class='column-manager-actions']/a")
     public WebElement gridSettings_SelectAll_Locator;
 
     @FindBy(xpath = "(//tbody/tr//td[@class='title-cell'])")
@@ -129,10 +129,10 @@ public class Locators {
     @FindBy(xpath = "//span[@class='grid-header-cell__label']")
     public List<WebElement> grid_HeaderCell_Locator;
 
-    /**
-     *US-010 Grid Settings-locators
-     * Assignee : Fatih
-     */
+    @FindBy(xpath = "//tbody/tr/td/label[text()='Id']")
+    public WebElement gridSettings_AfterSor_IdtTitle_locator;
+
+     /**     US-010 Grid Settings-locators Assignee : Fatih        */
 //suat******
     @FindBy(css = "tbody>tr") // cars page satırlar
     public List<WebElement> carRows_Locator;
