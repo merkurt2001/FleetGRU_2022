@@ -11,24 +11,24 @@ import java.util.List;
 
 public class LastOdometerStepDefs extends Actions {
 
-    @When("the user navigates to {string} to {string}")
-    public void the_user_select_from_the_top_bar(String string, String string2) {
+    @When("the user navigatess to {string} to {string}")
+    public void the_user_navigatess_to_to(String string, String string2) {
         BrowserUtils.waitFor(3);
         navigateToModule(string,string2);
         BrowserUtils.waitFor(5);
     }
 
-    @When("the user click the Filter button")
-    public void the_user_click_the_Filter_button() {
+    @When("the user click the Filter buttonn")
+    public void the_user_click_the_Filter_buttonn() {
         clickFilterBtn();
 
     }
-    @When("the user click Manage Filter")
-    public void the_user_click_Manage_Filter() {
+    @When("the user click Manage Filterr")
+    public void the_user_click_Manage_Filterr() {
        manageFiltersButton_Locator.click();
     }
-    @Then("the user select {string} filter")
-    public void the_user_select_filter(String item) {
+    @Then("the user select {string} filterr")
+    public void the_user_select_filterr(String item) {
 
        selectFilter(item);
     }
