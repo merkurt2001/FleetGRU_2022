@@ -291,19 +291,19 @@ public class Actions extends Locators {
         BrowserUtils.verifyElementDisplayed(gridSettings_Title_Locator);
     }
 
-    public void matchColumnTitle(List<String> expectedColName){
+    public void matchGridSettingsColumnTitle(List<String> expectedColName){
         BrowserUtils.waitFor(5);
         Assert.assertEquals("NOT match",expectedColName,BrowserUtils.getElementsText(gridSettings_ColumnTitle_locator));
         System.out.println("expectedColName = " + expectedColName);
         System.out.println("actualColNames = " + BrowserUtils.getElementsText(gridSettings_ColumnTitle_locator));
         BrowserUtils.waitFor(3);
     }
-    public void enterQuickSearch(String enterColumnName){
+    public void enterGridSettingsQuickSearch(String enterColumnName){
         BrowserUtils.waitFor(5);
         gridSettings_QuickSearch_Locator.sendKeys(enterColumnName);
     }
 
-    public void matchColumnFilter(String expectedColumnName){
+    public void matchGridSettingsColumnFilter(String expectedColumnName){
         Assert.assertEquals("Does NOT match", expectedColumnName, columnFilter_Match_Locator.getText());
 
     }
@@ -1036,6 +1036,70 @@ int x;
         int total_last=totalItem();
         Assert.assertEquals(total_last,total_first);
     }
+
+    /**      CONTINUE
+     * US-010 Grid Settings-method blocks
+     * Assignee : Fatih
+     */
+    public void selectAllGridSettings() {
+        BrowserUtils.waitFor(2);
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
+        jse.executeScript("arguments[0].click();", gridSettings_SelectAll_Locator);
+        BrowserUtils.waitFor(2);
+    }
+
+    public void clickGridSettingsColumnName() {
+        for (int i = 1; i <= gridSettings_ColumnName_locator.size(); i++) {
+            Driver.get().findElement(By.xpath("//table/tbody/tr[" + i + "]//td/label")).click();
+        }
+        for (int i = gridSettings_ColumnName_locator.size(); i >= 1; i--) {
+            Driver.get().findElement(By.xpath("//table/tbody/tr[" + i + "]//td/label")).click();
+        }
+    }
+
+    public void isDisplayed_TableTitle_GridSettings() {
+        for (int i = 1; i <= gridSettings_ColumnName_locator.size(); i++) {
+            Assert.assertTrue(Driver.get().findElement(By.xpath("//th[starts-with(@class,'grid-cell')][" + i + "]//span[text()]")).isDisplayed());
+        }
+    }
+
+    public void sortGridSettingsColumns() {
+        selectAllGridSettings();
+        for (int i = 2, k = 1; i <= gridSettings_Sort_Locator.size(); i++) {
+            WebElement sourceGridSettingsColumn = Driver.get().findElement(By.xpath("(//tbody/tr//td//span[@title='Move column'])[" + i + "]"));
+            WebElement targetGridSettingsColumn = Driver.get().findElement(By.xpath("(//tbody/tr//td//span[@title='Move column'])[" + k + "]"));
+            new org.openqa.selenium.interactions.Actions(Driver.get()).clickAndHold(sourceGridSettingsColumn).moveToElement(targetGridSettingsColumn).release(targetGridSettingsColumn).build().perform();
+            //System.out.println("target = " + k + " "  + Driver.get().findElement(By.xpath("//tbody/tr[@class='renderable']["+ k +"]/td/label")).getText());
+            k++;
+        }
+    }
+
+    public void checkSortGridSettings() {
+        String actualTitleAfterSort = Driver.get().findElement(By.xpath("//tbody/tr[@class='renderable'][20]/td/label")).getText();
+        System.out.println("actualTitleAfterSort = " + actualTitleAfterSort);
+        System.out.println("expected= " + gridSettings_AfterSor_IdtTitle_locator.getText());
+        Assert.assertEquals("sort Faild", gridSettings_AfterSor_IdtTitle_locator.getText(), actualTitleAfterSort);
+    }
+
+    public void gridSettingsChangeColumn() {
+        selectAllGridSettings();
+        for (int i = gridSettings_ColumnName_locator.size(); i >= 1; i--) {
+            Driver.get().findElement(By.xpath("//table/tbody/tr[" + i + "]//td/label")).click();
+        }
+
+    }
+
+    public void gridSettingsControlTableAllCars() {
+        Assert.assertTrue(Driver.get().findElement(By.xpath("//th[starts-with(@class,'grid-cell')][1]//span[text()]")).isDisplayed());
+    }
+
+    /**
+     * US-010 Grid Settings-method blocks
+     * Assignee : Fatih
+     */
+
+
+
 }
 
 

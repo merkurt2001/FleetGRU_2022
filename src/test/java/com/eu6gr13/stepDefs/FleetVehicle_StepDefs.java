@@ -63,7 +63,7 @@ public class FleetVehicle_StepDefs extends Actions {
 
 
     /**
-     *US-010 Grid Settings-locators
+     *US-010 Grid Settings
      * Assignee : Fatih
      */
 
@@ -76,21 +76,21 @@ public class FleetVehicle_StepDefs extends Actions {
 
     @Then("the Column names in grid settings should be shown as below")
     public void the_Column_names_in_grid_settings_should_be_shown_as_below(List<String> expectedColumnNames) {
-        matchColumnTitle(expectedColumnNames);
+        matchGridSettingsColumnTitle(expectedColumnNames);
     }
 
     @When("the user types any {string} on Quick Search box")
     public void the_user_types_any_on_Quick_Search_box(String enterColNames) {
-        enterQuickSearch(enterColNames);
+        enterGridSettingsQuickSearch(enterColNames);
     }
 
     @Then("the {string} should be visible")
     public void the_should_be_visible(String str) {
-        matchColumnFilter(str);
+        matchGridSettingsColumnFilter(str);
     }
 
     /**
-     *US-010 Grid Settings-locators
+     *US-010 Grid Settings
      * Assignee : Fatih
      */
     @Then("General information page can be seen") //MURAT
@@ -179,6 +179,38 @@ public class FleetVehicle_StepDefs extends Actions {
         verifyNotAcceptNon_AlphabeticalCharacters();
     }
 
+    /**
+     *            CONTINUE
+     *   US-010 Grid Settings    Assignee : Fatih
+     */
+
+    @When("the user click any column name")
+    public void the_user_click_any_column_name() {
+        selectAllGridSettings();
+        clickGridSettingsColumnName();
+    }
+    @Then("the user should select corresponding column")
+    public void the_user_should_select_corresponding_column() {
+        isDisplayed_TableTitle_GridSettings();
+    }
+    @When("the user drag and drop columns")
+    public void the_user_drag_and_drop_columns() {
+        sortGridSettingsColumns();
+    }
+    @Then("the user should arrange the order of the columns")
+    public void the_user_should_arrange_the_order_of_the_columns() {
+        checkSortGridSettings();
+    }
+    @When("the user arrange any change")
+    public void theUserArrangeAnyChange() {
+        gridSettingsChangeColumn();
+    }
+    @Then("the user should see all corresponding changes on the All Cars table")
+    public void theUserShouldSeeAllCorrespondingChangesOnTheAllCarsTable() {
+        gridSettingsControlTableAllCars();
+    }
+
+    /*   FINISH  US-010 Grid Settings  Assignee : Fatih        */
 
 
 }
