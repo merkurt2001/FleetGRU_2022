@@ -210,6 +210,16 @@ public class FleetVehicle_StepDefs extends Actions {
         gridSettingsControlTableAllCars();
     }
 
+    @When("the user types any column name on Quick Search box")
+    public void theUserTypesAnyColumnNameOnQuickSearchBox(List<String> b) {
+        enterGridSettingsQuickSearchBox(b);
+    }
+
+    @Then("the column name should be visible")
+    public void theColumnNameShouldBeVisible() {
+        matchGridSettingsColumnFilterControl();
+    }
+
     /*   FINISH  US-010 Grid Settings  Assignee : Fatih        */
 
 

@@ -1218,7 +1218,36 @@ int x;
         Thread.sleep(5000);
         return Driver.get().getCurrentUrl();
     }
+    /**
+     * US-010 Grid Settings-method blocks
+     * Assignee : Fatih
+     */
+    int a;
+    public void enterGridSettingsQuickSearchBox(List<String> enterColumnName){
+        a=0;
+        for (int i = 0; i < enterColumnName.size(); i++) {
+            BrowserUtils.waitFor(1);
+            gridSettings_QuickSearch_Locator.sendKeys(enterColumnName.get(i));
 
+            System.out.println("girilen değer "+enterColumnName.get(i));
+            System.out.println("cıkan değer"+columnFilter_Match_Locator.getText());
+            if(!enterColumnName.get(i).equals(columnFilter_Match_Locator.getText())){
+                a++;}
+            gridSettings_QuickSearch_Locator.clear();
+        }
+
+    }
+    public void matchGridSettingsColumnFilterControl(){
+        System.out.println("a : "+a);
+        if(a==0)
+            Assert.assertTrue("Does NOT match", true);
+        else Assert.assertTrue(false);
+
+    }
+    /**
+     * US-010 Grid Settings-method blocks
+     * Assignee : Fatih
+     */
 }
 
 
