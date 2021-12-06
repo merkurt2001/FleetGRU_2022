@@ -330,6 +330,30 @@ public class Locators {
     @FindBy(className = "ui-dialog")
     public WebElement addEventPopUp;
 
+    //ASTEKİN
+   //@FindBy(xpath = "//td[@data-column-label='Driver']")
+    //public List<WebElement> driverNames_Locator;
+    @FindBy(xpath = "//div[@class='grid-container']/table")
+    public WebElement informationTable_locator;
+    @FindBy(xpath = "//label[@class='dib'][2]")
+    public WebElement totalPage_locator;
+    @FindBy(xpath = "//input[@type='number']")
+    public WebElement pageNumber_locator;
+    @FindBy(css = ".fa-chevron-right.hide-text")
+    public WebElement forwardNumber_locator;
+    @FindBy(css = ".fa-chevron-left.hide-text")
+    public WebElement backwardNumber_locator;
+    @FindBy(xpath = "//label[@class='dib'][3]")
+    public WebElement totalRecordsPage_locator;
+    @FindBy (xpath = "(//a[contains(@class,'mode-text-only')])[1]")
+    public WebElement exportGrid_locator;
+    @FindBy (xpath = "//a[@data-index='0']")
+    public WebElement CSV_download_locator;
+    @FindBy (xpath = "//a[@data-index='1']")
+    public WebElement XLSX_download_locator;
+    @FindBy(css = ".flash-messages-holder>div")
+    public WebElement downloadMessage;
+
 
 
 

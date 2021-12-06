@@ -1248,7 +1248,55 @@ int x;
      * US-010 Grid Settings-method blocks
      * Assignee : Fatih
      */
+
+    public void verifyForwardButton(){
+        int firstNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
+
+        forwardNumber_locator.click();
+        BrowserUtils.waitFor(2);
+        int secondNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
+
+        Assert.assertEquals(secondNumber, firstNumber + 1);
+        BrowserUtils.waitFor(2);
+
+
+    }
+
+    public void verifyBackButton(){
+
+
+
+        int firstNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
+        backwardNumber_locator.click();
+        BrowserUtils.waitFor(2);
+        int secondNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
+
+        Assert.assertEquals(secondNumber, firstNumber - 1);
+    }
+    public void verifyCSVDownload(){
+        BrowserUtils.waitFor(1);
+        CSV_download_locator.click();
+        //System.out.println("table.downloadMessage.getText() = " + table.downloadMessage.getText());
+        BrowserUtils.waitFor(2);
+        Assert.assertTrue(downloadMessage.isDisplayed());
+
+
+    }
+
+    public void verifyXLSDownload(){
+
+        exportGrid_locator.click();
+
+        BrowserUtils.waitFor(1);
+        XLSX_download_locator.click();
+        BrowserUtils.waitFor(2);
+        //System.out.println("table.downloadMessage.getText() = " + table.downloadMessage.getText());
+        Assert.assertTrue(downloadMessage.isDisplayed());
+    }
 }
+
+
+
 
 
 
