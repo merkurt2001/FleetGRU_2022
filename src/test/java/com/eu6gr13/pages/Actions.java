@@ -1250,10 +1250,10 @@ int x;
      */
 
     public void verifyForwardButton(){
+BrowserUtils.waitForVisibility(pageNumber_locator,5);
         int firstNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
-
         forwardNumber_locator.click();
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitForPageToLoad(10);
         int secondNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
 
         Assert.assertEquals(secondNumber, firstNumber + 1);
@@ -1265,10 +1265,10 @@ int x;
     public void verifyBackButton(){
 
 
-
+        BrowserUtils.waitForVisibility(pageNumber_locator,5);
         int firstNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
         backwardNumber_locator.click();
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitForPageToLoad(10);
         int secondNumber = Integer.parseInt(pageNumber_locator.getAttribute("value"));
 
         Assert.assertEquals(secondNumber, firstNumber - 1);
