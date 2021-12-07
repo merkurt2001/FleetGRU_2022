@@ -354,6 +354,66 @@ public class Locators {
     @FindBy(css = ".flash-messages-holder>div")
     public WebElement downloadMessage;
 
+    /*
+       SAffet locators buradan alınacak
+
+        */
+    @FindBy(xpath = "//span[.='Vehicles']")// fleet/ vehicles table locator SAFFET
+    public WebElement vehicleTableLocator;
+
+    @FindBy(xpath = "//label[@class='control-label']")// saffet
+    public WebElement viewPerPageLocator;
+
+    @FindBy(css = ".dropdown-item") // drop-down locator saffet
+    public List<WebElement> numbers_locator;
+
+    @FindBy(xpath = "//button[@class='btn dropdown-toggle ']") //all drop-downs locator SAffet
+    public WebElement viewPerpagebuttonLocator;
+
+
+    @FindBy(xpath = "//span[.='Model Year']")  //table/tbody/tr/td[7] Model year locator SAffet
+    public WebElement modelYearLocator;
+
+    @FindBy(xpath = "//td[contains(@class,'cell-ModelYear')]")
+    public List<WebElement> modelYearsColumn;
+
+    @FindBy(xpath = "//a[3]/i[@class='fa-refresh']")
+    public WebElement resetLocator;
+
+    @FindBy (xpath = "//div/button[@class= 'btn dropdown-toggle ']")
+    public WebElement button_locator;
+
+    @FindBy(xpath = "//div[@class='btn-group open']/ul/li")
+    public List<WebElement> buttonDropdown_Locator;
+
+    @FindBy(xpath = "(//label[@class='dib'])[2]")
+    public WebElement pageSizeText_Locator;
+
+    @FindBy(xpath = "(//ul[@class='icons-holder']//li/a)[2]")// //i[@class='fa-chevron-right hide-text']
+    public WebElement tableRightButton_Locator;
+
+    @FindBy(xpath = "(//ul[@class='icons-holder']//li/a)[1]")
+    public WebElement tableLeftButton_Locator;
+
+    @FindBy(xpath = "//table/tbody/tr")
+    public  List<WebElement> tablerowCount_Locator;
+
+
+    @FindBy(xpath = "//th/a/span[@class='grid-header-cell__label']")
+    public List<WebElement> allTableTitle_locator;
+
+    @FindBy(xpath = "//a[@class='grid-header-cell__link']//span[@class='caret']")
+    public  List<WebElement> spanCaret_Locator;
+
+    @FindBy(xpath = "//a[@class='action btn reset-action mode-text-only']")
+    public WebElement resetButton_Locator;
+    /*
+    SAffet locators
+
+     */
+
+
+
 
 
 
