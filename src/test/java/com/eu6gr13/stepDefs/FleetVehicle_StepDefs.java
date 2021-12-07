@@ -297,13 +297,13 @@ public class FleetVehicle_StepDefs extends Actions {
 
     @Then("the user can see vehicle table")
     public void the_user_can_see_vehicle_table() {
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitForVisibility(informationTable_locator,10);
         Assert.assertTrue(informationTable_locator.isDisplayed());
     }
 
     @Then("the user can see the total page number")
     public void the_user_can_see_the_total_page_number() {
-        BrowserUtils.waitFor(3);
+        BrowserUtils.waitForVisibility(totalPage_locator,10);
         Assert.assertTrue(totalPage_locator.isDisplayed());
     }
 
@@ -319,23 +319,32 @@ public class FleetVehicle_StepDefs extends Actions {
 
     @Then("the user can see the total recordings of vehicle")
     public void the_user_can_see_the_total_recordings_of_vehicle() {
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitForVisibility(totalRecordsPage_locator,10);
         Assert.assertTrue(totalRecordsPage_locator.isDisplayed());
     }
 
     @When("the user clicks on export grid button")
     public void the_user_clicks_on_export_grid_button() {
+BrowserUtils.waitForVisibility( exportGrid_locator,10);
         exportGrid_locator.click();
+        BrowserUtils.waitForPageToLoad(10);
     }
-
     @Then("the user can download table in CSV format")
     public void the_user_can_download_table_in_CSV_format() {
-
+BrowserUtils.waitForVisibility(CSV_download_locator,5);
+        CSV_download_locator.click();
+        BrowserUtils.waitForVisibility(downloadMessage,5);
+        Assert.assertTrue(downloadMessage.isDisplayed());
     }
 
     @Then("the user can download table in XLSX format")
     public void the_user_can_download_table_in_XLSX_format() {
-
+        BrowserUtils.waitForVisibility( exportGrid_locator,10);
+        exportGrid_locator.click();
+        BrowserUtils.waitForVisibility(XLSX_download_locator,5);
+        XLSX_download_locator.click();
+        BrowserUtils.waitForVisibility(downloadMessage,5);
+        Assert.assertTrue(downloadMessage.isDisplayed());
     }
 
 }
