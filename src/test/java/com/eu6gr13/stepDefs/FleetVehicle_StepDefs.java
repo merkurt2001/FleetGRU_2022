@@ -2,13 +2,18 @@ package com.eu6gr13.stepDefs;
 
 import com.eu6gr13.pages.Actions;
 import com.eu6gr13.utilities.BrowserUtils;
+import com.eu6gr13.utilities.Driver;
 import com.eu6gr13.utilities.Screanshot;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FleetVehicle_StepDefs extends Actions {
@@ -347,4 +352,61 @@ BrowserUtils.waitForVisibility(CSV_download_locator,5);
         Assert.assertTrue(downloadMessage.isDisplayed());
     }
 
+
+    @Given("the view per page button is displayed")
+    public void the_view_per_page_button_is_displayed() {
+
+        viewPerPageButton_isDisplayed();
+    }
+
+    @Then("the value of View Per Page should be {int} by default")
+    public void the_value_of_View_Per_Page_should_be_by_default(int number) {
+        defaultValueOfPerPage(number);
+    }
+
+    @When("the user click the View Per Page button")
+    public void the_user_click_the_View_Per_Page_button() {
+        viewPerPageButton_click();
+    }
+
+    @Then("the content of the View Per Page should be the below")
+    public void the_content_of_the_View_Per_Page_should_be_the_below(List<String> data) {
+        viewPerPageContent_match(data);
+    }
+
+    @Then("the user can arrange rows vehicle numbers by clicking on {string} button")
+    public void the_user_can_arrange_rows_vehicle_numbers_by_clicking_on_button(String num) {
+        viewPerPage_ArrangeRows(num);
+
+    }
+
+    @When("the user click the Model Year button")
+    public void theUserClickTheModelYearButton() {
+
+        viewPerPage_ModelYear();
+    }
+
+    @When("the user can sort a column in ascending or descending order")
+    public void the_user_can_sort_a_column_in_ascending_or_descending_order() {
+        viewPerPage_SortColumn();
+    }
+
+    @Given("the user click the reset button")
+    public void the_user_click_the_reset_button() {
+        viewPerPage_ResetButton();
+    }
+
+    @Then("the user can remove all sortings and filterings on the page")
+    public void the_user_can_remove_all_sortings_and_filterings_on_the_page() {
+
+        viewPerPage_Remove();
+
+
+    }
+
+
+    /*SAffet Stepdefs*/
+
+
 }
+

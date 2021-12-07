@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -1293,7 +1294,124 @@ BrowserUtils.waitForVisibility(pageNumber_locator,5);
         //System.out.println("table.downloadMessage.getText() = " + table.downloadMessage.getText());
         Assert.assertTrue(downloadMessage.isDisplayed());
     }
+
+    /*SAffet Actions*/
+
+    public void viewPerPageButton_isDisplayed() {
+        BrowserUtils.waitFor(3);
+        viewPerpagebuttonLocator.isDisplayed();
+    }
+
+    public void defaultValueOfPerPage(int number) {
+        BrowserUtils.waitFor(5);
+        Assert.assertEquals(number, Integer.parseInt(viewPerpagebuttonLocator.getText()));
+
+
+    }
+
+    public void viewPerPageButton_click() {
+        BrowserUtils.waitFor(3);
+        JavascriptExecutor executor = (JavascriptExecutor) Driver.get();
+        executor.executeScript("arguments[0].click();", viewPerpagebuttonLocator);
+    }
+
+    public void viewPerPageContent_match(List<String> data) {
+        for (int i = 0; i < data.size(); i++) {
+            Assert.assertEquals(data.get(i), numbers_locator.get(i).getText());
+
+        }
+    }
+
+    public void viewPerPage_ArrangeRows(String num) {
+        getNumbersLocator(num).click();
+        BrowserUtils.waitFor(3);
+        Assert.assertEquals(num, viewPerpagebuttonLocator.getText());
+
+    }
+
+    public void viewPerPage_ModelYear() {
+        BrowserUtils.waitFor(3);
+        JavascriptExecutor executor = (JavascriptExecutor) Driver.get();
+        executor.executeScript("arguments[0].click();", modelYearLocator);
+
+    }
+
+    public void viewPerPage_SortColumn() {
+
+        BrowserUtils.waitFor(4);
+        button_locator.click();
+        BrowserUtils.waitFor(4);
+        buttonDropdown_Locator.get((buttonDropdown_Locator.size()) - 1).click();
+        BrowserUtils.waitFor(4);
+
+        List<String> list = getTableTitle_item("Model Year");
+        if (totalTablePage() > 1) {
+            for (int i = 1; i < totalTablePage(); i++) {
+                BrowserUtils.waitFor(2);
+                tableRightButton_Locator.click();
+                BrowserUtils.waitFor(2);
+                list.addAll(getTableTitle_item("Model Year"));
+                BrowserUtils.waitFor(1);
+            }
+        }
+
+        List<String> listAfterOrderExpected = new ArrayList<>();
+        listAfterOrderExpected.addAll(list);
+        Collections.sort(listAfterOrderExpected);
+
+
+        Assert.assertEquals(list, listAfterOrderExpected);
+    }
+
+    public void viewPerPage_ResetButton() {
+        BrowserUtils.waitFor(3);
+        resetButton_Locator.click();
+        BrowserUtils.waitFor(3);
+
+    }
+
+    public void viewPerPage_Remove() {
+        for (WebElement a : spanCaret_Locator) {
+            Assert.assertFalse(a.isDisplayed());
+        }
+
+    }
+
+    public int totalTablePage() {
+        String[] a = pageSizeText_Locator.getText().trim().split(" ");
+        return Integer.parseInt(a[1]);
+    }
+
+    public List<String> getTableTitle_item(String item) {
+        List<String> list = new ArrayList<>();
+
+        for (int i = 1; i < tablerowCount_Locator.size() + 1; i++) {
+
+            if (Driver.get().findElement(By.xpath("(//tbody/tr[@class='grid-row'])["+i+"]//td[@data-column-label='Model Year']")).getText().isEmpty())
+                list.add(" ");
+            else
+                list.add(Driver.get().findElement(By.xpath("(//tbody/tr[@class='grid-row'])["+i+"]//td[@data-column-label='Model Year']")).getText());
+        }
+        return list;
+    }
+
+
+    public WebElement getNumbersLocator(String item) {
+
+        for (WebElement webElement : numbers_locator) {
+            if (webElement.getText().equals(item)) {
+                return webElement;
+
+            }
+
+
+        }
+        return null;
+    }
+    /*SAffet Actions     */
 }
+
+
 
 
 
